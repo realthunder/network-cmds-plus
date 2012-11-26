@@ -1,0 +1,1098 @@
+--- a/network_cmds.xcodeproj/project.pbxproj	2012-01-14 08:21:44.000000000 +0800
++++ b/network_cmds.xcodeproj/project.pbxproj	2012-11-26 03:31:43.000000000 +0800
+@@ -3,7 +3,7 @@
+ 	archiveVersion = 1;
+ 	classes = {
+ 	};
+-	objectVersion = 45;
++	objectVersion = 46;
+ 	objects = {
+ 
+ /* Begin PBXAggregateTarget section */
+@@ -326,6 +326,13 @@
+ 			remoteGlobalIDString = 5658259E1339218F003E5FA5;
+ 			remoteInfo = mnc;
+ 		};
++		5964A7D91661419C0017D1F0 /* PBXContainerItemProxy */ = {
++			isa = PBXContainerItemProxy;
++			containerPortal = 724862310EE86EB7001D0DE9 /* Project object */;
++			proxyType = 1;
++			remoteGlobalIDString = 7261210B0EE8707500AFED1B;
++			remoteInfo = alias;
++		};
+ 		690D97B912DE7130004323A7 /* PBXContainerItemProxy */ = {
+ 			isa = PBXContainerItemProxy;
+ 			containerPortal = 724862310EE86EB7001D0DE9 /* Project object */;
+@@ -1814,6 +1821,7 @@
+ 			buildRules = (
+ 			);
+ 			dependencies = (
++				5964A7DA1661419C0017D1F0 /* PBXTargetDependency */,
+ 			);
+ 			name = natd;
+ 			productName = natd;
+@@ -1933,8 +1941,11 @@
+ /* Begin PBXProject section */
+ 		724862310EE86EB7001D0DE9 /* Project object */ = {
+ 			isa = PBXProject;
++			attributes = {
++				LastUpgradeCheck = 0450;
++			};
+ 			buildConfigurationList = 724862340EE86EB7001D0DE9 /* Build configuration list for PBXProject "network_cmds" */;
+-			compatibilityVersion = "Xcode 3.1";
++			compatibilityVersion = "Xcode 3.2";
+ 			developmentRegion = English;
+ 			hasScannedForEncodings = 0;
+ 			knownRegions = (
+@@ -2123,7 +2134,7 @@
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 1;
+ 			shellPath = /bin/sh;
+-			shellScript = "/bin/chmod 0444 $DSTROOT/usr/share/man/man8/rtsol.8\n/bin/ln -f $DSTROOT/usr/share/man/man8/rtsol.8 $DSTROOT/usr/share/man/man8/rtsold.8\n/bin/ln -f $DSTROOT/sbin/rtsol $DSTROOT/usr/sbin/rtsold\n/usr/bin/strip $DSTROOT/usr/sbin/rtsold\n/bin/chmod 0555 $DSTROOT/usr/sbin/rtsold\n";
++			shellScript = "/bin/chmod 0444 $DSTROOT/usr/share/man/man8/rtsol.8\n/bin/ln -f $DSTROOT/usr/share/man/man8/rtsol.8 $DSTROOT/usr/share/man/man8/rtsold.8\n/bin/ln -f $DSTROOT/sbin/rtsol $DSTROOT/usr/sbin/rtsold\n/usr/bin/strip $DSTROOT/usr/sbin/rtsold\n";
+ 		};
+ 		7216D3B30EE8A3E000AE70E4 /* ShellScript */ = {
+ 			isa = PBXShellScriptBuildPhase;
+@@ -2563,6 +2574,11 @@
+ 			target = 5658259E1339218F003E5FA5 /* mnc */;
+ 			targetProxy = 565825B013392242003E5FA5 /* PBXContainerItemProxy */;
+ 		};
++		5964A7DA1661419C0017D1F0 /* PBXTargetDependency */ = {
++			isa = PBXTargetDependency;
++			target = 7261210B0EE8707500AFED1B /* alias */;
++			targetProxy = 5964A7D91661419C0017D1F0 /* PBXContainerItemProxy */;
++		};
+ 		690D97BA12DE7130004323A7 /* PBXTargetDependency */ = {
+ 			isa = PBXTargetDependency;
+ 			target = 690D978012DE6034004323A7 /* mtest */;
+@@ -2744,27 +2760,30 @@
+ 		03B2DBE2100BE71D005349BC /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALWAYS_SEARCH_USER_PATHS = NO;
+-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
++				ALWAYS_SEARCH_USER_PATHS = YES;
++				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+ 				COPY_PHASE_STRIP = YES;
+ 				DEAD_CODE_STRIPPING = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*][arch=*]" = dwarf;
++				DEPLOYMENT_LOCATION = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
++					"PRIVATE=1",
+ 					"USE_RFC2292BIS=1",
+ 					"__APPLE_USE_RFC_3542=1",
+-					"__APPLE_API_OBSOLETE=1",
+ 				);
+ 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=*]" = (
+ 					"$(inherited)",
+ 					"TARGET_OS_EMBEDDED=1",
+ 				);
+ 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+-				PREBINDING = NO;
+-				SDKROOT = "";
++				HEADER_SEARCH_PATHS = "";
++				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
++				SDKROOT = iphoneos5.1;
+ 				"STRIPFLAGS[sdk=iphoneos*]" = "-S";
++				VALID_ARCHS = armv7;
+ 				WARNING_CFLAGS = "-Wall";
+ 				ZERO_LINK = NO;
+ 			};
+@@ -2773,9 +2792,9 @@
+ 		03B2DBE3100BE71D005349BC /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				PRODUCT_NAME = network_cmds;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -2792,19 +2811,15 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEAD_CODE_STRIPPING = YES;
+ 				DYLIB_CURRENT_VERSION = 1;
+ 				EXECUTABLE_PREFIX = lib;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				GCC_MODEL_TUNING = G5;
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/lib;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = alias.A;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -2814,9 +2829,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = arp;
+ 			};
+@@ -2826,10 +2838,13 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
+-					"$(inherited)",
+-					USE_IF_MEDIA,
+-					NO_IPX,
+-					INET6,
++					"USE_IF_MEDIA",
++					"NO_IPX",
++					"INET6",
++					"PRIVATE=1",
++					"USE_RFC2292BIS=1",
++					"__APPLE_USE_RFC_3542=1",
++					"IFF_PPROMISC=IFF_PROMISC",
+ 				);
+ 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*][arch=*]" = (
+ 					"$(inherited)",
+@@ -2837,9 +2852,6 @@
+ 					USE_BONDS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ifconfig;
+ 				ZERO_LINK = NO;
+@@ -2854,9 +2866,6 @@
+ 					IP_FW_PRIVATE,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ipfw;
+ 			};
+@@ -2870,9 +2879,6 @@
+ 					IP_FW_PRIVATE,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ip6fw;
+ 			};
+@@ -2881,9 +2887,7 @@
+ 		03B2DBEB100BE71D005349BC /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/libexec;
+ 				PRODUCT_NAME = kdumpd;
+ 			};
+@@ -2893,10 +2897,10 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = YES;
+-				HEADER_SEARCH_PATHS = ../alias;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = (
++					../alias,
++					/System/Library/Frameworks/System.framework/PrivateHeaders,
++				);
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = natd;
+ 				WARNING_CFLAGS = (
+@@ -2916,9 +2920,6 @@
+ 					KAME_SCOPEID,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = ndp;
+ 			};
+@@ -2933,9 +2934,6 @@
+ 					IPSEC,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = netstat;
+ 			};
+@@ -2945,9 +2943,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ping;
+ 			};
+@@ -2957,9 +2952,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ping6;
+ 			};
+@@ -2973,9 +2965,7 @@
+ 					"$(inherited)",
+ 					"TFTP_DIR=\\\"/tftpboot\\\"",
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = rarpd;
+ 			};
+@@ -2990,9 +2980,6 @@
+ 					IPSEC,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = route;
+ 			};
+@@ -3007,9 +2994,6 @@
+ 					HAVE_GETIFADDRS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = rtadvd;
+ 				WARNING_CFLAGS = (
+@@ -3028,9 +3012,6 @@
+ 					HAVE_GETIFADDRS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = rtsol;
+ 				WARNING_CFLAGS = (
+@@ -3043,9 +3024,6 @@
+ 		03B2DBF5100BE71D005349BC /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = spray;
+ 			};
+@@ -3054,14 +3032,11 @@
+ 		03B2DBF6100BE71D005349BC /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALTERNATE_MODE = 04555;
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
+ 					"$(inherited)",
+ 					HAVE_SOCKADDR_SA_LEN,
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 04555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = traceroute;
+ 			};
+@@ -3075,9 +3050,7 @@
+ 					INET6,
+ 					IPSEC,
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 04555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = traceroute6;
+ 			};
+@@ -3086,20 +3059,13 @@
+ 		4D2B04F51208C2050004A3F3 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALTERNATE_GROUP = wheel;
+-				ALTERNATE_MODE = 0555;
+-				ALTERNATE_OWNER = root;
+-				ALWAYS_SEARCH_USER_PATHS = NO;
++				ALWAYS_SEARCH_USER_PATHS = YES;
+ 				COPY_PHASE_STRIP = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = ip6addrctl;
+ 			};
+ 			name = Debug;
+@@ -3107,13 +3073,12 @@
+ 		4D2B04F61208C2050004A3F3 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALWAYS_SEARCH_USER_PATHS = NO;
++				ALWAYS_SEARCH_USER_PATHS = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				GCC_MODEL_TUNING = G5;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = ip6addrctl;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -3122,11 +3087,10 @@
+ 		4D2B04F71208C2050004A3F3 /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALWAYS_SEARCH_USER_PATHS = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
++				ALWAYS_SEARCH_USER_PATHS = YES;
+ 				GCC_MODEL_TUNING = G5;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = ip6addrctl;
+ 			};
+ 			name = "Ignore Me";
+@@ -3137,11 +3101,9 @@
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
+ 				COPY_PHASE_STRIP = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = mnc;
+ 			};
+ 			name = Debug;
+@@ -3152,10 +3114,8 @@
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				GCC_MODEL_TUNING = G5;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = mnc;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -3165,10 +3125,8 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = mnc;
+ 			};
+ 			name = "Ignore Me";
+@@ -3180,14 +3138,10 @@
+ 				COPY_PHASE_STRIP = NO;
+ 				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*][arch=*]" = dwarf;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = mtest;
+ 			};
+ 			name = Debug;
+@@ -3199,13 +3153,9 @@
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*][arch=*]" = dwarf;
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				GCC_MODEL_TUNING = G5;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = mtest;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -3216,13 +3166,9 @@
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
+ 				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*][arch=*]" = dwarf;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+ 				GCC_MODEL_TUNING = G5;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/local/bin;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = mtest;
+ 			};
+ 			name = "Ignore Me";
+@@ -3236,9 +3182,6 @@
+ 					IPSEC,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = netstat;
+ 			};
+@@ -3253,9 +3196,6 @@
+ 					IPSEC,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = netstat;
+ 			};
+@@ -3265,9 +3205,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ping;
+ 			};
+@@ -3277,9 +3214,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ping;
+ 			};
+@@ -3289,9 +3223,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ping6;
+ 			};
+@@ -3301,9 +3232,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ping6;
+ 			};
+@@ -3317,9 +3245,7 @@
+ 					"$(inherited)",
+ 					"TFTP_DIR=\\\"/tftpboot\\\"",
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = rarpd;
+ 			};
+@@ -3333,9 +3259,7 @@
+ 					"$(inherited)",
+ 					"TFTP_DIR=\\\"/tftpboot\\\"",
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = rarpd;
+ 			};
+@@ -3350,9 +3274,6 @@
+ 					IPSEC,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = route;
+ 			};
+@@ -3367,9 +3288,6 @@
+ 					IPSEC,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = route;
+ 			};
+@@ -3384,9 +3302,6 @@
+ 					HAVE_GETIFADDRS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = rtadvd;
+ 				WARNING_CFLAGS = (
+@@ -3405,9 +3320,6 @@
+ 					HAVE_GETIFADDRS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = rtadvd;
+ 				WARNING_CFLAGS = (
+@@ -3426,9 +3338,6 @@
+ 					HAVE_GETIFADDRS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = rtsol;
+ 				WARNING_CFLAGS = (
+@@ -3447,9 +3356,6 @@
+ 					HAVE_GETIFADDRS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = rtsol;
+ 				WARNING_CFLAGS = (
+@@ -3462,9 +3368,6 @@
+ 		7216D3A90EE8A3BB00AE70E4 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = spray;
+ 			};
+@@ -3473,9 +3376,6 @@
+ 		7216D3AA0EE8A3BB00AE70E4 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = spray;
+ 			};
+@@ -3493,9 +3393,6 @@
+ 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/local/bin;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 			};
+@@ -3509,9 +3406,6 @@
+ 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/local/bin;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 			};
+@@ -3525,9 +3419,6 @@
+ 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/local/bin;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 			};
+@@ -3536,26 +3427,28 @@
+ 		724862320EE86EB7001D0DE9 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALWAYS_SEARCH_USER_PATHS = NO;
+-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
++				ALWAYS_SEARCH_USER_PATHS = YES;
++				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+ 				COPY_PHASE_STRIP = NO;
+ 				DEAD_CODE_STRIPPING = YES;
++				DEPLOYMENT_LOCATION = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
++					"PRIVATE=1",
+ 					"USE_RFC2292BIS=1",
+ 					"__APPLE_USE_RFC_3542=1",
+-					"__APPLE_API_OBSOLETE=1",
+ 				);
+ 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=*]" = (
+ 					"$(inherited)",
+ 					"TARGET_OS_EMBEDDED=1",
+ 				);
+ 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+-				PREBINDING = NO;
+-				SDKROOT = "";
++				HEADER_SEARCH_PATHS = "";
++				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
++				SDKROOT = iphoneos5.1;
++				VALID_ARCHS = armv7;
+ 				WARNING_CFLAGS = "-Wall";
+ 			};
+ 			name = Debug;
+@@ -3563,27 +3456,30 @@
+ 		724862330EE86EB7001D0DE9 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALWAYS_SEARCH_USER_PATHS = NO;
+-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
++				ALWAYS_SEARCH_USER_PATHS = YES;
++				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+ 				COPY_PHASE_STRIP = YES;
+ 				DEAD_CODE_STRIPPING = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*][arch=*]" = dwarf;
++				DEPLOYMENT_LOCATION = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
++					"PRIVATE=1",
+ 					"USE_RFC2292BIS=1",
+ 					"__APPLE_USE_RFC_3542=1",
+-					"__APPLE_API_OBSOLETE=1",
+ 				);
+ 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=*]" = (
+ 					"$(inherited)",
+ 					"TARGET_OS_EMBEDDED=1",
+ 				);
+ 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+-				PREBINDING = NO;
+-				SDKROOT = "";
++				HEADER_SEARCH_PATHS = "";
++				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
++				SDKROOT = iphoneos5.1;
+ 				"STRIPFLAGS[sdk=iphoneos*]" = "-S";
++				VALID_ARCHS = armv7;
+ 				WARNING_CFLAGS = "-Wall";
+ 				ZERO_LINK = NO;
+ 			};
+@@ -3597,9 +3493,6 @@
+ 					IP_FW_PRIVATE,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ipfw;
+ 			};
+@@ -3613,9 +3506,6 @@
+ 					IP_FW_PRIVATE,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ipfw;
+ 			};
+@@ -3629,9 +3519,6 @@
+ 					IP_FW_PRIVATE,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ip6fw;
+ 			};
+@@ -3645,9 +3532,6 @@
+ 					IP_FW_PRIVATE,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ip6fw;
+ 			};
+@@ -3656,9 +3540,7 @@
+ 		724DABA40EE88FE3008900D0 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/libexec;
+ 				PRODUCT_NAME = kdumpd;
+ 			};
+@@ -3667,9 +3549,7 @@
+ 		724DABA50EE88FE3008900D0 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/libexec;
+ 				PRODUCT_NAME = kdumpd;
+ 			};
+@@ -3679,10 +3559,10 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = YES;
+-				HEADER_SEARCH_PATHS = ../alias;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = (
++					../alias,
++					/System/Library/Frameworks/System.framework/PrivateHeaders,
++				);
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = natd;
+ 				WARNING_CFLAGS = (
+@@ -3696,10 +3576,10 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = YES;
+-				HEADER_SEARCH_PATHS = ../alias;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = (
++					../alias,
++					/System/Library/Frameworks/System.framework/PrivateHeaders,
++				);
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = natd;
+ 				WARNING_CFLAGS = (
+@@ -3719,9 +3599,6 @@
+ 					KAME_SCOPEID,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = ndp;
+ 			};
+@@ -3737,9 +3614,6 @@
+ 					KAME_SCOPEID,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = ndp;
+ 			};
+@@ -3763,20 +3637,16 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = NO;
+ 				DEAD_CODE_STRIPPING = YES;
+ 				DYLIB_CURRENT_VERSION = 1;
+ 				EXECUTABLE_PREFIX = lib;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/lib;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = alias.A;
+ 			};
+ 			name = Debug;
+@@ -3785,19 +3655,15 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEAD_CODE_STRIPPING = YES;
+ 				DYLIB_CURRENT_VERSION = 1;
+ 				EXECUTABLE_PREFIX = lib;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				GCC_MODEL_TUNING = G5;
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/lib;
+-				PREBINDING = NO;
+ 				PRODUCT_NAME = alias.A;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -3807,9 +3673,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = arp;
+ 			};
+@@ -3819,9 +3682,6 @@
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = arp;
+ 			};
+@@ -3830,6 +3690,7 @@
+ 		726121440EE8717500AFED1B /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+@@ -3840,9 +3701,9 @@
+ 		726121450EE8717500AFED1B /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				PRODUCT_NAME = network_cmds;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -3851,11 +3712,15 @@
+ 		726121560EE8881800AFED1B /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				DSTROOT = "	";
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
+-					"$(inherited)",
+-					USE_IF_MEDIA,
+-					NO_IPX,
+-					INET6,
++					"USE_IF_MEDIA",
++					"NO_IPX",
++					"INET6",
++					"PRIVATE=1",
++					"USE_RFC2292BIS=1",
++					"__APPLE_USE_RFC_3542=1",
++					"IFF_PPROMISC=IFF_PROMISC",
+ 				);
+ 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*][arch=*]" = (
+ 					$inherited,
+@@ -3863,9 +3728,6 @@
+ 					USE_BONDS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ifconfig;
+ 			};
+@@ -3874,11 +3736,15 @@
+ 		726121570EE8881800AFED1B /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				DSTROOT = "	";
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
+-					"$(inherited)",
+-					USE_IF_MEDIA,
+-					NO_IPX,
+-					INET6,
++					"USE_IF_MEDIA",
++					"NO_IPX",
++					"INET6",
++					"PRIVATE=1",
++					"USE_RFC2292BIS=1",
++					"__APPLE_USE_RFC_3542=1",
++					"IFF_PPROMISC=IFF_PROMISC",
+ 				);
+ 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*][arch=*]" = (
+ 					"$(inherited)",
+@@ -3886,9 +3752,6 @@
+ 					USE_BONDS,
+ 				);
+ 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 0555;
+-				INSTALL_OWNER = root;
+ 				INSTALL_PATH = /sbin;
+ 				PRODUCT_NAME = ifconfig;
+ 				ZERO_LINK = NO;
+@@ -3898,14 +3761,11 @@
+ 		7294F0FB0EE8BB460052EC88 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALTERNATE_MODE = 04555;
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
+ 					"$(inherited)",
+ 					HAVE_SOCKADDR_SA_LEN,
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 04555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = traceroute;
+ 			};
+@@ -3914,14 +3774,11 @@
+ 		7294F0FC0EE8BB460052EC88 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ALTERNATE_MODE = 04555;
+ 				GCC_PREPROCESSOR_DEFINITIONS = (
+ 					"$(inherited)",
+ 					HAVE_SOCKADDR_SA_LEN,
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 04555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = traceroute;
+ 			};
+@@ -3935,9 +3792,7 @@
+ 					INET6,
+ 					IPSEC,
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 04555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = traceroute6;
+ 			};
+@@ -3951,9 +3806,7 @@
+ 					INET6,
+ 					IPSEC,
+ 				);
+-				INSTALL_GROUP = wheel;
+-				INSTALL_MODE_FLAG = 04555;
+-				INSTALL_OWNER = root;
++				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+ 				INSTALL_PATH = /usr/sbin;
+ 				PRODUCT_NAME = traceroute6;
+ 			};
+@@ -3962,6 +3815,7 @@
+ 		72ABD0821083D743008C721C /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+@@ -3976,9 +3830,9 @@
+ 		72ABD0831083D743008C721C /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				PRODUCT_NAME = "All-EmbeddedOther";
+ 				ZERO_LINK = NO;
+ 			};
+@@ -3987,6 +3841,7 @@
+ 		72ABD0841083D743008C721C /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				PRODUCT_NAME = "All-EmbeddedOther";
+ 			};
+ 			name = "Ignore Me";
+@@ -3994,6 +3849,7 @@
+ 		72C77D681484199C002D2577 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = NO;
+ 				GCC_DYNAMIC_NO_PIC = NO;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+@@ -4004,9 +3860,9 @@
+ 		72C77D691484199C002D2577 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				PRODUCT_NAME = network_cmds_libs;
+ 				ZERO_LINK = NO;
+ 			};
+@@ -4015,9 +3871,9 @@
+ 		72C77D6A1484199C002D2577 /* Ignore Me */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
++				COMBINE_HIDPI_IMAGES = YES;
+ 				COPY_PHASE_STRIP = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+ 				PRODUCT_NAME = network_cmds_libs;
+ 				ZERO_LINK = NO;
+ 			};
