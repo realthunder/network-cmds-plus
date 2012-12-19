@@ -40,6 +40,7 @@ dist: all package
 package:
 	rm -rf dist/share dist/System dist/private
 	cp -a debian/* dist/
+	ldid -S dist/sbin/* dist/usr/sbin/*
 	if ! dpkg-deb -b dist; then \
 		echo "packaging failed"; \
 		exit 1;\
