@@ -3,7 +3,7 @@ Name: network-cmds+
 Section: Networking
 Maintainer: Zheng, Lei (realthunder) <realthunder.dev@gmail.com>
 Architecture: iphoneos-arm
-Version: 396.6.0-1
+Version: 396.6.0-2
 Pre-Depends: dpkg (>= 1.14.25-8)
 Provides: arp, ifconfig, netstat, route, traceroute, traceroute6, ping, ping6, radvd, radvdump, etc
 Description: upgrade of saurik's port of network-cmds with complete ipv6 support, plus radvd and radvdump

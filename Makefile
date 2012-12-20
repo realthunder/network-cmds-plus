@@ -35,12 +35,17 @@ PACKAGES=network_cmds radvd
 
 all: $(PACKAGES)
 
-dist: all package
+dist: cleandist all package
 
 package:
-	rm -rf dist/share dist/System dist/private
+	rm -rf dist/usr/local/OpenSourceVersions dist/usr/local/share dist/share dist/System dist/private
 	cp -a debian/* dist/
-	ldid -S dist/sbin/* dist/usr/sbin/*
+	for f in dist/usr/libexec/* dist/usr/local/bin/* dist/sbin/* dist/usr/sbin/*; do\
+		if [ "$${f%2}" = "$$f" ]; then\
+			ldid -S "$$f";\
+			mv "$$f" "$$f"2;\
+		fi;\
+	done
 	if ! dpkg-deb -b dist; then \
 		echo "packaging failed"; \
 		exit 1;\
@@ -54,15 +59,16 @@ $(PACKAGES):
 	mkdir -p dist
 	make -C packages/$@
 
+cleandist:
+	rm -rf dist *deb
+
 clean:
 	$(call Make,clean)
-	rm -rf dist
-	rm *.deb
+	rm -rf dist *deb
 
 cleanall:
 	$(call Make,pkg.cleanall)
-	rm -rf dist
-	rm *.deb
+	rm -rf dist *deb
 
 
 
